@@ -1,0 +1,7 @@
+numpy
+pandas
+pillow
+matplotlib
+seaborn
+torch
+open_clip_torch

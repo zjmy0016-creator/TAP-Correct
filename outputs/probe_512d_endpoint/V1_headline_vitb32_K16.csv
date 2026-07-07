@@ -1,0 +1,2 @@
+method,backbone,k,false_pick_rate,pick_precision,pick_recall,revisit_burden
+V1_TAP_512D_endpoint,vitb32,16,0.0914,0.9086,0.806,0.1919
