@@ -41,6 +41,15 @@ NARRATIVE.md
 *Outline*
 *manuscript*
 *Manuscript*
+论文*
+TAP-Correct_manuscript_outline.md
+整体评价.md
+证据地图.md
+执行计划*
+日志.md
+SETUP_LOG.md
+NARRATIVE.md
+docs/superpowers/
 
 # Raw/local data is not included in the public repository.
 data/
@@ -51,6 +60,7 @@ outputs/*
 !outputs/features_vitb32.npz
 !outputs/features_vitb16.npz
 !outputs/features_vitl14.npz
+!outputs/features_laboro_tomato_vitb16.npz
 
 !outputs/episodes/
 outputs/episodes/*
@@ -91,3 +101,6 @@ outputs/probe_512d_endpoint/*/*
 
 !outputs/v1_official_eval/
 !outputs/v1_official_eval/**
+
+!outputs/clip_selective_baselines/
+!outputs/clip_selective_baselines/**

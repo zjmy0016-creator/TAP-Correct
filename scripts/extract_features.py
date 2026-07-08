@@ -65,15 +65,18 @@ def main():
             tf = tf / tf.norm(dim=-1, keepdim=True)
             text_feats[cls] = tf.cpu().numpy().astype(np.float32)
 
-    np.savez(args.out,
-        image_feats=feats,
-        image_paths=np.array([str(p) for p in paths]),
-        classes=np.array(classes),
-        splits=np.array(splits),
-        text_ripe=text_feats["ripe"], text_turning=text_feats["turning"], text_unripe=text_feats["unripe"],
-        prompts_ripe=np.array(prompt_bank["ripe"]),
-        prompts_turning=np.array(prompt_bank["turning"]),
-        prompts_unripe=np.array(prompt_bank["unripe"]))
+    # Build save dict dynamically from prompt_bank keys
+    save_dict = {
+        "image_feats": feats,
+        "image_paths": np.array([str(p) for p in paths]),
+        "classes": np.array(classes),
+        "splits": np.array(splits),
+    }
+    for cls in prompt_bank.keys():
+        save_dict[f"text_{cls}"] = text_feats[cls]
+        save_dict[f"prompts_{cls}"] = np.array(prompt_bank[cls])
+
+    np.savez(args.out, **save_dict)
     print(f"saved -> {args.out}  image_feats={feats.shape}")
 
 

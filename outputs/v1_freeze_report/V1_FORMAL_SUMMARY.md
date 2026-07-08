@@ -34,5 +34,9 @@ The result should be framed as a risk-coverage improvement, not as complete domi
 ## Limitations to state
 
 - V1 is a diagnostic-driven post-hoc method selection after the D5 V0 audit.
-- The current formal freeze uses the same dataset family as the diagnosis and needs a second held-out dataset for the strongest external-validity claim.
+- The formal freeze remains the strawberry protocol. Laboro Tomato now provides external validation under the same frozen endpoint/threshold protocol, but it uses one backbone and class-based pick ground truth rather than the full strawberry artifact set.
 - The uncertainty mechanism should be described as a revisit-control audit signal, not as the main contribution.
+
+## External validation: Laboro Tomato
+
+Laboro Tomato was added as a second-dataset check. Zero-shot CLIP shows a severe mature-class collapse (F1 = 0.04). Under the frozen K=16 protocol, the V1 512D-endpoint risk-coverage frontier has lower or equal false-pick rate than the B5-family frontier across the common coverage region. At B5's operating coverage, V1 false-pick is lower than B5 (52.8% vs 59.7%). The tomato check should still be bounded as external validation rather than a complete second formal freeze because it uses one backbone, class-based pick ground truth, and a lower-separability crop setting where V1 max coverage is lower than the B5 family (49.8% vs 76.7%).

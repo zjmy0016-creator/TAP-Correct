@@ -1,0 +1,13 @@
+dataset,backbone,family,false_pick_alpha,selection_status,source_file,n_source_rows,n_episodes,episode,baseline,selector,target_coverage,coverage,false_pick_rate,pick_precision,pick_recall,revisit_burden,n_samples,n_pick,n_wait,n_revisit,n_false_pick,n_true_pick,temperature,alpha,beta,proto_weight,calibration_nll,selector_threshold
+laboro_tomato,vitb16,ZS-temp,0.05,selected,zs_temp_laboro_tomato_vitb16.csv,1,,,ZS-temp-selective,entropy,0.8,0.670318205529,0,1,0.00906344410876,0.329681794471,1917,4,1281,632,0,3,0.01,,,,0.7152784621166596,0.9398739650852741
+laboro_tomato,vitb16,ZS-temp,0.10,selected,zs_temp_laboro_tomato_vitb16.csv,1,,,ZS-temp-selective,entropy,0.8,0.670318205529,0,1,0.00906344410876,0.329681794471,1917,4,1281,632,0,3,0.01,,,,0.7152784621166596,0.9398739650852741
+laboro_tomato,vitb16,TipAdapter,0.05,no_feasible_row,,,,,,,,,,,,,,,,,,,,,,,,
+laboro_tomato,vitb16,TipAdapter,0.10,selected,tip_adapter_laboro_tomato_vitb16.csv,20,20,mean,TipAdapter-selective,entropy,0.4,0.372170057381,0.0996761980273,0.750323801973,0.25996978852,0.627829942619,1917,150.25,563.2,1203.55,23.2,86.05,,varies,varies,,varies,varies
+laboro_tomato,vitb16,ProtoAdapter,0.05,no_feasible_row,,,,,,,,,,,,,,,,,,,,,,,,
+laboro_tomato,vitb16,ProtoAdapter,0.10,no_feasible_row,,,,,,,,,,,,,,,,,,,,,,,,
+strawberry,vitb32,ZS-temp,0.05,selected,zs_temp_strawberry_vitb32.csv,1,,,ZS-hard,none,1.0,0.91568296796,0.011673151751,0.988326848249,0.779026217228,0.0843170320405,593,257,286,50,3,208,1.0,,,,,
+strawberry,vitb32,ZS-temp,0.10,selected,zs_temp_strawberry_vitb32.csv,1,,,ZS-hard,none,1.0,0.91568296796,0.011673151751,0.988326848249,0.779026217228,0.0843170320405,593,257,286,50,3,208,1.0,,,,,
+strawberry,vitb32,TipAdapter,0.05,selected,tip_adapter_strawberry_vitb32.csv,20,20,mean,TipAdapter-hard,none,1.0,0.754215851602,0.0255411887085,0.974458811292,0.786329588015,0.245784148398,593,239.7,207.55,145.75,7.05,209.95,,varies,varies,,varies,
+strawberry,vitb32,TipAdapter,0.10,selected,tip_adapter_strawberry_vitb32.csv,20,20,mean,TipAdapter-hard,none,1.0,0.754215851602,0.0255411887085,0.974458811292,0.786329588015,0.245784148398,593,239.7,207.55,145.75,7.05,209.95,,varies,varies,,varies,
+strawberry,vitb32,ProtoAdapter,0.05,selected,proto_adapter_strawberry_vitb32.csv,20,20,mean,ProtoAdapter-hard,none,1.0,0.730354131535,0.0107531650366,0.989246834963,0.775655430712,0.269645868465,593,227.7,205.4,159.9,2.35,207.1,,,,8.0,varies,
+strawberry,vitb32,ProtoAdapter,0.10,selected,proto_adapter_strawberry_vitb32.csv,20,20,mean,ProtoAdapter-hard,none,1.0,0.730354131535,0.0107531650366,0.989246834963,0.775655430712,0.269645868465,593,227.7,205.4,159.9,2.35,207.1,,,,8.0,varies,

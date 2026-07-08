@@ -84,6 +84,77 @@ python scripts/extract_features.py --model ViT-B-16 --pretrained openai --out ou
 python scripts/extract_features.py --model ViT-L-14 --pretrained openai --out outputs/features_vitl14.npz
 ```
 
+## Laboro Tomato External Check
+
+The Laboro Tomato run is a second-dataset external validation check under the
+same frozen endpoint/threshold protocol used for the strawberry V1 result. It
+requires the raw Laboro Tomato COCO data under `data/laboro_tomato/raw/`.
+
+Prepare crops and the crop index:
+
+```bash
+python scripts/crop_laboro_tomato.py --data_root data/laboro_tomato
+python scripts/prepare_laboro_index.py
+```
+
+Extract ViT-B/16 features:
+
+```bash
+python scripts/extract_features.py --data_dir data/laboro_tomato --out outputs/features_laboro_tomato_vitb16.npz --model ViT-B-16 --pretrained openai --batch_size 64
+```
+
+Run the zero-shot collapsed-class diagnosis:
+
+```bash
+python scripts/eval_zeroshot_tomato.py --npz outputs/features_laboro_tomato_vitb16.npz
+```
+
+Run the frozen-protocol K=16 tomato frontier:
+
+```bash
+python scripts/tomato_frontier.py --npz outputs/features_laboro_tomato_vitb16.npz --k 16 --n_episodes 100
+```
+
+Expected summary from the current local run:
+
+- 9430 crops total: 1617 mature, 1616 turning, 6197 immature.
+- Zero-shot weakest class: mature, F1 = 0.04.
+- Under the frozen protocol, the V1 512D-endpoint frontier has lower or equal
+  false-pick rate than the B5-family frontier over the common coverage region.
+- At B5's operating coverage, V1 false-pick is lower than B5 (52.8% vs 59.7%).
+- V1 max coverage is lower than the B5 family (49.8% vs 76.7%), reflecting the
+  conservative behavior required by low tomato class separability.
+
+## CLIP/Selective Baselines
+
+Generate the zero-shot, Tip-Adapter, and Proto-Adapter selective baselines:
+
+```bash
+python scripts/run_zs_temp_selective_baseline.py --npz outputs/features_vitb32.npz --out outputs/clip_selective_baselines/zs_temp_strawberry_vitb32.csv --dataset strawberry --backbone vitb32
+python scripts/run_zs_temp_selective_baseline.py --npz outputs/features_laboro_tomato_vitb16.npz --out outputs/clip_selective_baselines/zs_temp_laboro_tomato_vitb16.csv --dataset laboro_tomato --backbone vitb16
+python scripts/run_tip_adapter_selective_baseline.py --npz outputs/features_vitb32.npz --out outputs/clip_selective_baselines/tip_adapter_strawberry_vitb32.csv --dataset strawberry --backbone vitb32 --k 16 --n_episodes 20
+python scripts/run_tip_adapter_selective_baseline.py --npz outputs/features_laboro_tomato_vitb16.npz --out outputs/clip_selective_baselines/tip_adapter_laboro_tomato_vitb16.csv --dataset laboro_tomato --backbone vitb16 --k 16 --n_episodes 20
+python scripts/run_proto_adapter_selective_baseline.py --npz outputs/features_vitb32.npz --out outputs/clip_selective_baselines/proto_adapter_strawberry_vitb32.csv --dataset strawberry --backbone vitb32 --k 16 --n_episodes 20
+python scripts/run_proto_adapter_selective_baseline.py --npz outputs/features_laboro_tomato_vitb16.npz --out outputs/clip_selective_baselines/proto_adapter_laboro_tomato_vitb16.csv --dataset laboro_tomato --backbone vitb16 --k 16 --n_episodes 20
+python scripts/summarize_clip_selective_baselines.py --input_dir outputs/clip_selective_baselines --out outputs/clip_selective_baselines/main_table.csv --false_pick_alphas 0.05 0.10
+```
+
+Generate the false-pick-controlled and strict unsafe-pick diagnostics:
+
+```bash
+python scripts/run_fp_controlled_baseline.py --npz outputs/features_vitb32.npz --out outputs/clip_selective_baselines/fp_controlled_strawberry_vitb32.csv --dataset strawberry --backbone vitb32 --k 16 --n_episodes 20
+python scripts/run_fp_controlled_baseline.py --npz outputs/features_laboro_tomato_vitb16.npz --out outputs/clip_selective_baselines/fp_controlled_laboro_tomato_vitb16.csv --dataset laboro_tomato --backbone vitb16 --k 16 --n_episodes 20
+python scripts/run_unsafe_pick_diagnostic.py --npz outputs/features_vitb32.npz --out outputs/clip_selective_baselines/unsafe_pick_strawberry_vitb32.csv --dataset strawberry --backbone vitb32 --k 16 --n_episodes 20
+python scripts/run_unsafe_pick_diagnostic.py --npz outputs/features_laboro_tomato_vitb16.npz --out outputs/clip_selective_baselines/unsafe_pick_laboro_tomato_vitb16.csv --dataset laboro_tomato --backbone vitb16 --k 16 --n_episodes 20
+```
+
+The generated interpretation tables are:
+
+- `outputs/clip_selective_baselines/main_table.csv`
+- `outputs/clip_selective_baselines/fp_controlled_main_table.csv`
+- `outputs/clip_selective_baselines/unsafe_pick_main_table.csv`
+- `outputs/clip_selective_baselines/BASELINE_RESULTS_SUMMARY.md`
+
 ## Tests
 
 ```bash

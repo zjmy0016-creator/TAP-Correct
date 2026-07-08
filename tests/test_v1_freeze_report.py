@@ -59,6 +59,8 @@ class TestV1FreezeReport(unittest.TestCase):
             self.assertIn("Formal V1 frozen protocol", report_text)
             self.assertIn("post-hoc method selection", report_text)
             self.assertIn("same-coverage recall trade-off", report_text)
+            self.assertIn("Laboro Tomato", report_text)
+            self.assertIn("External validation", report_text)
 
 
 if __name__ == "__main__":

@@ -22,6 +22,15 @@ The V1 claim is not:
 
 > V1 fully dominates B5 on every metric.
 
+Addendum, 2026-07-07:
+
+> A Laboro Tomato external validation check has been completed with the same
+> frozen endpoint and threshold protocol as the strawberry V1 result. It
+> supports the transfer of the collapsed-class failure pattern and the
+> 512D-endpoint false-pick reduction under a lower-separability crop setting,
+> but it remains lighter than the strawberry freeze because it uses one
+> backbone and class-based pick ground truth.
+
 ## 2. Frozen Inputs
 
 - Dataset split and episode manifest: `outputs/episodes/manifest_K1-16_ep100.json`
@@ -155,14 +164,40 @@ python -m unittest discover -v
 
 - V1 fully dominates B5 on all metrics.
 - The uncertainty signal significantly enriches human borderline samples.
-- V1 has been externally validated across independent datasets.
+- The Laboro Tomato check is a complete second frozen protocol equivalent to
+  the strawberry V1 freeze.
+- V1 has strong external validity across many datasets or crop families.
 - V1 is a trained or learned maturity model.
 
 ## 9. Required Limitations
 
 - V1 is a diagnostic-driven post-hoc method selection after the D5 V0 audit.
-- The current repository freezes the protocol and reports multi-backbone
-  robustness, but it does not add a second held-out dataset.
+- The current repository formally freezes the strawberry protocol and reports
+  multi-backbone robustness. Laboro Tomato provides external validation under
+  the same frozen endpoint/threshold protocol, but it uses one backbone and
+  class-based pick ground truth rather than the full strawberry artifact set.
 - Same-coverage pick recall remains lower than B5 in the overlap region.
 - The uncertainty mechanism should be described as revisit control and
   supplementary audit, not as the main contribution.
+
+## 10. Preliminary External Validation: Laboro Tomato
+
+- Dataset: Laboro Tomato crops generated from COCO boxes, 9430 patches across
+  mature, turning, and immature levels.
+- Backbone: frozen CLIP ViT-B/16.
+- Zero-shot result: the weakest class is mature, with F1 = 0.04; this differs
+  from the strawberry turning collapse but preserves the broader
+  collapsed-class failure pattern.
+- Frozen-protocol check: K=16, 100 episodes, ALPHA=0.05, GAMMA=0.10,
+  N_CANDIDATES=200, defer sweep 0..0.6, and B5 margin 20th-percentile.
+- Result: over the common risk-coverage region, the V1 512D-endpoint frontier
+  has lower or equal false-pick rate than the B5-family frontier at every
+  shared coverage point. At B5's operating coverage, V1 false-pick is lower
+  than B5 (52.8% vs 59.7%).
+- Limitation: tomato remains a hard, low-separability external check. V1 max
+  coverage is lower than the B5 family (49.8% vs 76.7%), so the tomato result
+  should be framed as conservative risk-control behavior rather than full
+  metric domination.
+- Claim boundary: use this evidence to argue cross-dataset plausibility under
+  a frozen protocol, not as a complete second formal freeze equivalent to the
+  strawberry protocol.
