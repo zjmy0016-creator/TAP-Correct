@@ -5,3 +5,5 @@ matplotlib
 seaborn
 torch
 open_clip_torch
+scikit-learn
+scipy

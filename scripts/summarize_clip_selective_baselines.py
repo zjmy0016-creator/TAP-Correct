@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Summarize CLIP/selective baseline CSVs into reviewer-facing main table."""
+"""Summarize CLIP/selective baseline CSVs into release-facing main table."""
 from __future__ import annotations
 
 import argparse

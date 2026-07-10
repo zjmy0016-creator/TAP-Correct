@@ -1,2 +1,0 @@
-method,backbone,k,false_pick_rate,pick_precision,pick_recall,revisit_burden,freeze_status,protocol,threshold_source,feature_training,notes
-V1_TAP_512D_endpoint,vitb32,16,0.0914,0.9086,0.806,0.1919,formal_v1_endpoint_frozen,512D_prototype_expectation_endpoint_E,calibration_only,none,V1 is the frozen method; V0 H-axis results are retained as the diagnostic motivation stage.

@@ -1,0 +1,2 @@
+method,k,n_turning,n_human_borderline,n_human_non_borderline,n_episodes,n_model_revisit_turning,n_model_revisit_turning_borderline,n_human_borderline_deferred,n_human_non_borderline_deferred,revisit_enrichment,borderline_defer_rate,borderline_base_rate,enrichment_lift,non_borderline_defer_rate,defer_rate_gap
+V1_TAP_512D_endpoint,16,129,69,60,100,4448,2707,2707,1741,0.608588,0.392319,0.534884,0.073704,0.290167,0.102152

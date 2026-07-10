@@ -1,5 +1,0 @@
-method,k,metric,mean,ci_lower,ci_upper,n_bootstrap,seed
-V1_TAP_512D_endpoint,16,false_pick_rate,0.091450,0.085374,0.097556,1000,42
-V1_TAP_512D_endpoint,16,pick_precision,0.908550,0.902444,0.914626,1000,42
-V1_TAP_512D_endpoint,16,pick_recall,0.805687,0.793785,0.817288,1000,42
-V1_TAP_512D_endpoint,16,revisit_burden,0.191979,0.185243,0.198317,1000,42

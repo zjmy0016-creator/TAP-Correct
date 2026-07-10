@@ -1,0 +1,5 @@
+comparator,metric,mean_diff_v1_minus_comparator,ci_lower,ci_upper,contains_zero,n_bootstrap,seed
+B5_kshot_hard_reject,false_pick_rate,0.050248,0.040675,0.059505,False,1000,42
+B5_kshot_hard_reject,pick_precision,-0.050248,-0.060058,-0.040437,False,1000,42
+B5_kshot_hard_reject,pick_recall,0.149036,0.130857,0.169291,False,1000,42
+B5_kshot_hard_reject,revisit_burden,-0.206728,-0.217067,-0.195344,False,1000,42

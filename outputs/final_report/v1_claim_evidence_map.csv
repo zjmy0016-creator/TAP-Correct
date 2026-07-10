@@ -1,0 +1,6 @@
+claim,evidence,status
+V1 provides the frozen ViT-B/32 headline operating point.,"false_pick_rate=0.0914, pick_precision=0.9086, pick_recall=0.8060, revisit_burden=0.1919.",supported
+The V1 frontier can reduce false-pick risk at the B5 operating coverage.,The V1 and B5 frontiers are compared at the same coverage for all frozen backbones.,supported
+Stronger CLIP backbones show lower V1 false-pick rates than B5 at the calibrated operating point.,ViT-B/16 and ViT-L/14 satisfy the comparison: True.,supported
+V1 is a risk-coverage trade-off and not a universal dominance claim.,The release table reports the same-coverage recall gap and the coverage ceiling for both methods.,limitation
+Laboro Tomato provides an external validation check under the same endpoint policy.,The external check uses one backbone and class-based pick ground truth.,limitation

@@ -1,5 +1,0 @@
-comparator,metric,mean_diff_v1_minus_comparator,ci_lower,ci_upper,contains_zero,n_bootstrap,seed
-V0_H_endpoint,false_pick_rate,-0.058687,-0.064425,-0.052931,False,1000,42
-V0_H_endpoint,pick_precision,0.058687,0.052482,0.063973,False,1000,42
-V0_H_endpoint,pick_recall,0.032286,0.024996,0.039966,False,1000,42
-V0_H_endpoint,revisit_burden,-0.025531,-0.030675,-0.020337,False,1000,42

@@ -19,14 +19,11 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from scripts.clip_selective_baselines import (  # noqa: E402
-    entropy,
     evaluate_actions,
-    make_selective_decisions,
+    make_calibration_selective_decisions,
     map_class_predictions_to_actions,
-    max_probability,
     predict_classes_from_logits,
     softmax,
-    top2_margin,
 )
 
 
@@ -169,7 +166,8 @@ def hard_decision_row(
 def selective_rows(
     dataset: str,
     backbone: str,
-    logits: np.ndarray,
+    calibration_logits: np.ndarray,
+    query_logits: np.ndarray,
     labels: np.ndarray,
     classes: list[str],
     temperature: float,
@@ -177,8 +175,9 @@ def selective_rows(
     rows = []
     for selector in SELECTORS:
         for target_coverage in COVERAGE_GRID:
-            actions, info = make_selective_decisions(
-                logits=logits,
+            actions, info = make_calibration_selective_decisions(
+                calibration_logits=calibration_logits,
+                query_logits=query_logits,
                 classes=classes,
                 selector=selector,
                 target_coverage=target_coverage,
@@ -232,7 +231,7 @@ def run(
         }
     ]
 
-    for row in selective_rows(dataset, backbone, query_logits, query_labels, classes, best_temp):
+    for row in selective_rows(dataset, backbone, cal_logits, query_logits, query_labels, classes, best_temp):
         row["calibration_nll"] = best_nll
         rows.append(row)
 

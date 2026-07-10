@@ -1,2 +1,0 @@
-method,k,n_total,n_pred_pick,n_pred_wait,n_pred_revisit,n_gt_pick,n_gt_wait,n_gt_revisit,n_pick_pick,n_false_pick,n_false_wait,false_pick_rate,pick_precision,pick_recall,revisit_burden
-V1_TAP_512D_endpoint,16,59300,24836,23086,11378,28000,24400,6900,22567,2269,3028,0.091359,0.908641,0.805964,0.191872

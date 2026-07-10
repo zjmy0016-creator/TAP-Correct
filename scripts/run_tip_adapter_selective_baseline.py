@@ -20,7 +20,7 @@ if str(ROOT) not in sys.path:
 
 from scripts.clip_selective_baselines import (  # noqa: E402
     evaluate_actions,
-    make_selective_decisions,
+    make_calibration_selective_decisions,
     map_class_predictions_to_actions,
     one_hot,
     predict_classes_from_logits,
@@ -137,7 +137,8 @@ def selective_rows(
     dataset: str,
     backbone: str,
     episode: int,
-    logits: np.ndarray,
+    calibration_logits: np.ndarray,
+    query_logits: np.ndarray,
     labels: np.ndarray,
     classes: list[str],
     alpha: float,
@@ -147,8 +148,9 @@ def selective_rows(
     rows = []
     for selector in SELECTORS:
         for target_coverage in COVERAGE_GRID:
-            actions, info = make_selective_decisions(
-                logits=logits,
+            actions, info = make_calibration_selective_decisions(
+                calibration_logits=calibration_logits,
+                query_logits=query_logits,
                 classes=classes,
                 selector=selector,
                 target_coverage=target_coverage,
@@ -224,6 +226,14 @@ def run(
             classes=classes,
         )
 
+        cal_cache_logits = tip_adapter_cache_logits(
+            query_feats=cal_feats,
+            support_feats=support_feats,
+            support_onehot=support_onehot,
+            beta=beta,
+            alpha=alpha,
+        )
+        cal_logits = cal_zs_logits + cal_cache_logits
         query_cache_logits = tip_adapter_cache_logits(
             query_feats=query_feats,
             support_feats=support_feats,
@@ -251,6 +261,7 @@ def run(
                 dataset,
                 backbone,
                 episode,
+                cal_logits,
                 query_logits,
                 query_labels,
                 classes,

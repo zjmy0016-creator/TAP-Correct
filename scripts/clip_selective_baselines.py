@@ -172,6 +172,17 @@ def entropy(probs: np.ndarray, eps: float = 1e-12) -> np.ndarray:
     return -np.sum(probs * np.log(probs + eps), axis=1)
 
 
+def selector_confidence_scores(probs: np.ndarray, selector: str) -> tuple[np.ndarray, bool]:
+    """Return selector scores and whether larger scores mean higher confidence."""
+    if selector == "msp":
+        return max_probability(probs), True
+    if selector == "margin":
+        return top2_margin(probs), True
+    if selector == "entropy":
+        return entropy(probs), False
+    raise ValueError(f"unknown selector: {selector}")
+
+
 def threshold_by_coverage(
     confidence_scores: np.ndarray,
     target_coverage: float,
@@ -274,27 +285,45 @@ def make_selective_decisions(
     probs = softmax(logits, temperature=temperature)
     pred_classes = predict_classes_from_logits(logits, classes)
     base_actions = map_class_predictions_to_actions(pred_classes)
-
-    if selector == "msp":
-        scores = max_probability(probs)
-        threshold = threshold_by_coverage(scores, target_coverage, True)
-        accept = accept_by_threshold(scores, threshold, True)
-    elif selector == "margin":
-        scores = top2_margin(probs)
-        threshold = threshold_by_coverage(scores, target_coverage, True)
-        accept = accept_by_threshold(scores, threshold, True)
-    elif selector == "entropy":
-        scores = entropy(probs)
-        threshold = threshold_by_coverage(scores, target_coverage, False)
-        accept = accept_by_threshold(scores, threshold, False)
-    else:
-        raise ValueError(f"unknown selector: {selector}")
+    scores, higher_is_confident = selector_confidence_scores(probs, selector)
+    threshold = threshold_by_coverage(scores, target_coverage, higher_is_confident)
+    accept = accept_by_threshold(scores, threshold, higher_is_confident)
 
     actions = apply_reject(base_actions, accept)
     info = {
         "selector": selector,
         "target_coverage": float(target_coverage),
         "threshold": float(threshold),
+        "actual_accept_rate": float(np.mean(accept)),
+    }
+    return actions, info
+
+
+def make_calibration_selective_decisions(
+    calibration_logits: np.ndarray,
+    query_logits: np.ndarray,
+    classes: Iterable[str],
+    selector: str,
+    target_coverage: float,
+    temperature: float = 1.0,
+) -> tuple[np.ndarray, dict]:
+    """Set the selector threshold on calibration logits, then apply it to query."""
+    cal_probs = softmax(calibration_logits, temperature=temperature)
+    query_probs = softmax(query_logits, temperature=temperature)
+    cal_scores, higher_is_confident = selector_confidence_scores(cal_probs, selector)
+    query_scores, _ = selector_confidence_scores(query_probs, selector)
+
+    threshold = threshold_by_coverage(cal_scores, target_coverage, higher_is_confident)
+    accept = accept_by_threshold(query_scores, threshold, higher_is_confident)
+
+    pred_classes = predict_classes_from_logits(query_logits, classes)
+    base_actions = map_class_predictions_to_actions(pred_classes)
+    actions = apply_reject(base_actions, accept)
+    info = {
+        "selector": selector,
+        "target_coverage": float(target_coverage),
+        "threshold": float(threshold),
+        "calibration_accept_rate": float(np.mean(accept_by_threshold(cal_scores, threshold, higher_is_confident))),
         "actual_accept_rate": float(np.mean(accept)),
     }
     return actions, info

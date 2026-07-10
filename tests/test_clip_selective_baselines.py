@@ -6,6 +6,7 @@ from scripts.clip_selective_baselines import (
     entropy,
     evaluate_actions,
     map_class_predictions_to_actions,
+    make_calibration_selective_decisions,
     max_probability,
     one_hot,
     softmax,
@@ -76,6 +77,23 @@ class TestClipSelectiveBaselines(unittest.TestCase):
         threshold = threshold_by_coverage(scores, target_coverage=0.5, higher_is_confident=True)
         accepted = scores >= threshold
         self.assertEqual(int(accepted.sum()), 2)
+
+    def test_calibration_selective_decisions_threshold_on_calibration_scores(self):
+        cal_logits = np.array([[5.0, 0.0], [4.0, 0.0]])
+        query_logits = np.array([[1.0, 0.0], [0.9, 0.0]])
+
+        actions, info = make_calibration_selective_decisions(
+            calibration_logits=cal_logits,
+            query_logits=query_logits,
+            classes=["mature", "immature"],
+            selector="msp",
+            target_coverage=0.5,
+        )
+
+        expected_threshold = softmax(cal_logits)[0].max()
+        self.assertAlmostEqual(info["threshold"], expected_threshold)
+        self.assertEqual(actions.tolist(), ["revisit", "revisit"])
+        self.assertEqual(info["actual_accept_rate"], 0.0)
 
     def test_evaluate_actions(self):
         actions = np.array(["pick", "pick", "wait", "revisit"])
