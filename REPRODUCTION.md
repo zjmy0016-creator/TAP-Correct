@@ -2,7 +2,8 @@
 
 This guide describes the public inputs, execution order, and generated
 artifacts for the TAP-Correct V1 release, including both external-validation
-datasets.
+datasets. Dataset source records and citation entries are provided in
+`DATASETS.md`.
 
 ## Environment
 
@@ -85,6 +86,7 @@ python -m unittest discover -v
 | `outputs/official_evaluation/` | Pooled metrics, confidence intervals, audits, B5 differences, and cost sensitivity |
 | `outputs/final_report/` | Release summary, headline metrics, and claim evidence |
 | `outputs/strawberryds_eval/` | Strawberry-DS summary metrics for all three evaluation modes |
+| `DATASETS.md` | Dataset sources, recommended citations, and license notes |
 
 ## External validation utilities
 

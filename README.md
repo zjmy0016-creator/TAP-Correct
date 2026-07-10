@@ -59,7 +59,8 @@ Here, `maincal` is the direct-transfer setting, `recalib` measures the
 sensitivity to external-domain calibration, and `indomain` is an in-domain
 reference. The complete summary CSVs are versioned under
 `outputs/strawberryds_eval/`; per-episode CSVs and raw images are not part of
-the public delivery.
+the public delivery. Dataset source records, recommended citations, and
+license notes are provided in [DATASETS.md](DATASETS.md).
 
 ## Repository layout
 
@@ -82,6 +83,7 @@ PROTOCOL.md                         Frozen method and claim boundary
 REPRODUCTION.md                     Reproduction commands and outputs
 DELIVERY.md                         Public release inventory
 CHANGELOG.md                        Formal release trace
+DATASETS.md                         Dataset sources, citations, and license notes
 ```
 
 The public tree excludes raw crop images, source datasets, unpublished
@@ -187,4 +189,5 @@ as a standalone uncertainty model.
 ## Citation
 
 If you use this repository, cite the repository URL and identify the formal
-protocol version in [PROTOCOL.md](PROTOCOL.md).
+protocol version in [PROTOCOL.md](PROTOCOL.md). Cite the external datasets
+according to [DATASETS.md](DATASETS.md) when using either external evaluation.

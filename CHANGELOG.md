@@ -16,6 +16,8 @@
 - Updated the public README, protocol, reproduction guide, and delivery
   inventory to document Laboro Tomato and Strawberry-DS with explicit scope,
   modes, outputs, and limitations.
+- Added `DATASETS.md` with official source records, recommended citations, and
+  license notes for both public datasets.
 - Consolidated formal traceability in this file and in the Git commit history.
 
 ### Removed from the public tree
@@ -34,6 +36,7 @@ The release audit covers:
 - public path references in `README.md`, `PROTOCOL.md`, `REPRODUCTION.md`, and
   `DELIVERY.md`;
 - Strawberry-DS feature-cache and summary-output inclusion checks;
+- dataset source, citation, and license-record checks;
 - English-only public text and filenames;
 - absence of superseded method or process-stage identifiers in tracked text;
 - Python syntax compilation;

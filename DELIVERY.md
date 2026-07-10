@@ -11,6 +11,7 @@ This document defines the contents of the TAP-Correct V1 public release.
 | Tests | `tests/` | Unit, contract, dependency, and reproduction checks |
 | Formal protocol | `PROTOCOL.md` | Frozen inputs, procedure, metrics, and claim boundary |
 | Reproduction guide | `REPRODUCTION.md` | Commands, asset map, outputs, and reproduction controls |
+| Dataset attribution | `DATASETS.md` | Public dataset sources, citations, and license notes |
 | Release trace | `CHANGELOG.md` | Formal change and verification record |
 | Frozen data | `outputs/` allowlist | Features, manifests, labels, thresholds, decisions, external-validation summaries, and final release summaries |
 
@@ -44,6 +45,7 @@ The release is considered deliverable only when:
 3. the README commands resolve to existing public paths;
 4. both Laboro Tomato and Strawberry-DS external-validation entries resolve to
    existing public inputs, scripts, and summary outputs;
-5. the full test suite completes successfully;
-6. the final Git tree contains no ignored research materials;
-7. the release commit is pushed to the configured remote branch.
+5. dataset attribution and license notes are present in `DATASETS.md`;
+6. the full test suite completes successfully;
+7. the final Git tree contains no ignored research materials;
+8. the release commit is pushed to the configured remote branch.

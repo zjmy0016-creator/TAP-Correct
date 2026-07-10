@@ -110,3 +110,10 @@ python -m unittest discover -v
 - Same-coverage recall and maximum coverage trade-offs remain visible in the
   frontier artifacts.
 - Revisit is a decision-control action, not a standalone uncertainty model.
+
+## 9. Dataset attribution
+
+Laboro Tomato and Strawberry-DS are external public datasets and must be
+credited independently of TAP-Correct. The authoritative source records,
+recommended BibTeX entries, and license notes are maintained in
+`DATASETS.md`.
