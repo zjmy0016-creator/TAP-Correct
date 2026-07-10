@@ -27,6 +27,7 @@ specified data split, threshold policy, support sizes, and evaluation metrics.
   - `outputs/features_vitb16.npz`
   - `outputs/features_vitl14.npz`
   - `outputs/features_laboro_tomato_vitb16.npz`
+  - `outputs/features_strawberryds_vitb32.npz`
 - Formal support size: `K=16`
 - Calibration size: 200 samples per class and episode
 - Episodes: 100 per support-size block
@@ -94,11 +95,17 @@ python -m unittest discover -v
   under the frozen protocol.
 - Laboro Tomato is a bounded external check using one backbone and
   class-based pick ground truth.
+- Strawberry-DS is reported as three explicitly labeled evaluations: direct
+  transfer (`maincal`), external recalibration sensitivity (`recalib`), and an
+  in-domain reference (`indomain`). These results use the public feature cache,
+  `K=16`, and the stated episode construction.
 
 ## 8. Required limitations
 
 - Results are protocol-specific and do not establish universal cross-crop
   generalization.
+- Laboro Tomato and Strawberry-DS use separate external-validation protocols;
+  neither dataset establishes universal deployment performance.
 - V1 should not be described as dominating every comparator on every metric.
 - Same-coverage recall and maximum coverage trade-offs remain visible in the
   frontier artifacts.

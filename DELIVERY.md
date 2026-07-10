@@ -12,13 +12,14 @@ This document defines the contents of the TAP-Correct V1 public release.
 | Formal protocol | `PROTOCOL.md` | Frozen inputs, procedure, metrics, and claim boundary |
 | Reproduction guide | `REPRODUCTION.md` | Commands, asset map, outputs, and reproduction controls |
 | Release trace | `CHANGELOG.md` | Formal change and verification record |
-| Frozen data | `outputs/` allowlist | Features, manifests, labels, thresholds, decisions, and final summaries |
+| Frozen data | `outputs/` allowlist | Features, manifests, labels, thresholds, decisions, external-validation summaries, and final release summaries |
 
 ## Output allowlist
 
 The public output tree contains only:
 
 - frozen CLIP feature caches;
+- Strawberry-DS external-validation feature cache and mode-specific summary CSVs;
 - the deterministic episode manifest;
 - the decision ground-truth CSV;
 - calibration thresholds;
@@ -30,8 +31,9 @@ The public output tree contains only:
 ## Excluded content
 
 The public release excludes raw source datasets, crop images, local exports,
-unpublished research documents, temporary files, and intermediate analysis
-folders that are not required by the formal reproduction sequence.
+unpublished research documents, temporary files, per-episode Strawberry-DS
+CSVs, and intermediate analysis folders that are not required by the formal
+reproduction sequence.
 
 ## Acceptance criteria
 
@@ -40,6 +42,8 @@ The release is considered deliverable only when:
 1. all public filenames and user-facing text are in English;
 2. the public tree contains no process-stage or superseded method identifiers;
 3. the README commands resolve to existing public paths;
-4. the full test suite completes successfully;
-5. the final Git tree contains no ignored research materials;
-6. the release commit is pushed to the configured remote branch.
+4. both Laboro Tomato and Strawberry-DS external-validation entries resolve to
+   existing public inputs, scripts, and summary outputs;
+5. the full test suite completes successfully;
+6. the final Git tree contains no ignored research materials;
+7. the release commit is pushed to the configured remote branch.

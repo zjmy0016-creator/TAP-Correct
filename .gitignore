@@ -57,6 +57,7 @@ tmp/
 !/outputs/features_vitb16.npz
 !/outputs/features_vitl14.npz
 !/outputs/features_laboro_tomato_vitb16.npz
+!/outputs/features_strawberryds_vitb32.npz
 
 !/outputs/episodes/
 /outputs/episodes/*
@@ -96,3 +97,9 @@ tmp/
 !/outputs/final_report/**
 !/outputs/official_evaluation/
 !/outputs/official_evaluation/**
+
+!/outputs/strawberryds_eval/
+/outputs/strawberryds_eval/*
+!/outputs/strawberryds_eval/strawberryds_eval_maincal_summary.csv
+!/outputs/strawberryds_eval/strawberryds_eval_recalib_summary.csv
+!/outputs/strawberryds_eval/strawberryds_eval_indomain_summary.csv
