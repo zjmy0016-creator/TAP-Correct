@@ -66,6 +66,7 @@ tmp/
 
 !/outputs/decision_gold/
 /outputs/decision_gold/*
+!/outputs/decision_gold/annotator_N500_labels.csv
 !/outputs/decision_gold/turning_decision_dataset/
 /outputs/decision_gold/turning_decision_dataset/*
 !/outputs/decision_gold/turning_decision_dataset/labels/
